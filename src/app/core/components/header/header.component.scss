@@ -1,0 +1,21 @@
+span {
+  margin-right: 64px;
+}
+
+mat-list {
+  display: flex;
+}
+
+a {
+  cursor: pointer;
+  color: white;
+  font-size: 0.8rem;
+  display: inline-block;
+  padding-right: 8px;
+  text-decoration: none;
+  text-align: left;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
