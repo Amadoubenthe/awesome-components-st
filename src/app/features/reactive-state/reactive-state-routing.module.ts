@@ -6,7 +6,7 @@ import { SingleCandidateComponent } from './components/single-candidate/single-c
 const routes: Routes = [
   { path: 'candidates', component: CandidateListComponent },
   { path: 'candidates/:id', component: SingleCandidateComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'candidates' },
+  { path: '', redirectTo: 'candidates', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,140 +1,138 @@
-<section class="main-content">
-  <mat-card [formGroup]="mainForm" class="main-form">
-    <mat-card-title>Inscription</mat-card-title>
-    <mat-card class="form-card" [formGroup]="personalInfoForm">
-      <mat-card-subtitle>Informationss personnelles</mat-card-subtitle>
-      <div class="form-row">
-        <mat-form-field class="example-full-width">
-          <mat-label>Prénom</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Prénom"
-            formControlName="firstName"
-          />
-          <mat-error>Ce champ est requis</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Nom</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Nom"
-            formControlName="lastName"
-          />
-          <mat-error>Ce champ est requis</mat-error>
-        </mat-form-field>
-      </div>
-    </mat-card>
-    <mat-card class="form-card">
-      <mat-card-subtitle
-        >Comment préférez-vous que l'on vous contacte ?</mat-card-subtitle
-      >
-      <mat-radio-group
-        aria-label="Select an option"
-        [formControl]="contactPreferenceCtrl"
-      >
-        <mat-radio-button value="email">Mail</mat-radio-button>
-        <mat-radio-button value="phone">Phone</mat-radio-button>
-      </mat-radio-group>
-    </mat-card>
-    <mat-card
-      class="form-card"
-      [formGroup]="emailForm"
-      *ngIf="showEmailCtrl$ | async"
-    >
-      <mat-card-subtitle>Email</mat-card-subtitle>
-      <div class="form-row">
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            placeholder="Adresse email"
-            formControlName="email"
-          />
-          <mat-error>{{ getFormControlErrorText(emailCtrl) }}</mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Confirm email</mat-label>
-          <input
-            type="email"
-            matInput
-            placeholder="Confirmer votre email"
-            formControlName="confirmEmail"
-          />
-          <mat-error>{{ getFormControlErrorText(confirmEmailCtrl) }}</mat-error>
-        </mat-form-field>
-      </div>
-      <small class="error-text" *ngIf="showEmailConfirmError$ | async"
-        >Les deux champs ne correspondent pas</small
-      >
-    </mat-card>
-    <mat-card class="form-card" *ngIf="showPhoneCtrl$ | async">
-      <mat-card-subtitle>Téléphone</mat-card-subtitle>
+<mat-card [formGroup]="mainForm" class="main-form">
+  <mat-card-title>Inscription</mat-card-title>
+  <mat-card class="form-card" [formGroup]="personalInfoForm">
+    <mat-card-subtitle>Informationss personnelles</mat-card-subtitle>
+    <div class="form-row">
       <mat-form-field class="example-full-width">
-        <mat-label>Telephone</mat-label>
+        <mat-label>Prénom</mat-label>
         <input
-          type="tel"
+          type="text"
           matInput
-          placeholder="225 05 84 10 87 16"
-          [formControl]="phoneCtrl"
+          placeholder="Prénom"
+          formControlName="firstName"
         />
-        <mat-error>{{ getFormControlErrorText(phoneCtrl) }}</mat-error>
+        <mat-error>Ce champ est requis</mat-error>
       </mat-form-field>
-    </mat-card>
-    <mat-card class="form-card" [formGroup]="loginInfoForm">
-      <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
-      <div class="form-row">
-        <mat-form-field class="example-full-width">
-          <mat-label>First name</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Nom d'utilisateur"
-            formControlName="username"
-          />
-          <mat-error>{{ getFormControlErrorText(usernameCtrl) }}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field class="example-full-width">
-          <mat-label>Mot de passe</mat-label>
-          <input
-            type="password"
-            matInput
-            placeholder="Mot de passe"
-            formControlName="password"
-          />
-          <mat-error>{{ getFormControlErrorText(passwordCtrl) }}</mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Confirmer votre mot de passe</mat-label>
-          <input
-            type="password"
-            matInput
-            placeholder="Confirm Mot de passe"
-            formControlName="confirmPassword"
-          />
-          <mat-error>{{
-            getFormControlErrorText(confirmPasswordCtrl)
-          }}</mat-error>
-        </mat-form-field>
-      </div>
-      <small class="error-text" *ngIf="showPasswordConfirmError$ | async"
-        >Les deux champs ne correspondent pas</small
-      >
-    </mat-card>
-    <mat-card-actions class="btn-container" *ngIf="mainForm.valid">
-      <button mat-flat-button color="primary" (click)="onSubmitForm()">
-        ENREGISTRER
-      </button>
-    </mat-card-actions>
-    <mat-spinner
-      *ngIf="loading"
-      color="primary"
-      mode="indeterminate"
-    ></mat-spinner>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Nom</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Nom"
+          formControlName="lastName"
+        />
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
   </mat-card>
-</section>
+  <mat-card class="form-card">
+    <mat-card-subtitle
+      >Comment préférez-vous que l'on vous contacte ?</mat-card-subtitle
+    >
+    <mat-radio-group
+      aria-label="Select an option"
+      [formControl]="contactPreferenceCtrl"
+    >
+      <mat-radio-button value="email">Mail</mat-radio-button>
+      <mat-radio-button value="phone">Phone</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+  <mat-card
+    class="form-card"
+    [formGroup]="emailForm"
+    *ngIf="showEmailCtrl$ | async"
+  >
+    <mat-card-subtitle>Email</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="Adresse email"
+          formControlName="email"
+        />
+        <mat-error>{{ getFormControlErrorText(emailCtrl) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm email</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="Confirmer votre email"
+          formControlName="confirmEmail"
+        />
+        <mat-error>{{ getFormControlErrorText(confirmEmailCtrl) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <small class="error-text" *ngIf="showEmailConfirmError$ | async"
+      >Les deux champs ne correspondent pas</small
+    >
+  </mat-card>
+  <mat-card class="form-card" *ngIf="showPhoneCtrl$ | async">
+    <mat-card-subtitle>Téléphone</mat-card-subtitle>
+    <mat-form-field class="example-full-width">
+      <mat-label>Telephone</mat-label>
+      <input
+        type="tel"
+        matInput
+        placeholder="225 05 84 10 87 16"
+        [formControl]="phoneCtrl"
+      />
+      <mat-error>{{ getFormControlErrorText(phoneCtrl) }}</mat-error>
+    </mat-form-field>
+  </mat-card>
+  <mat-card class="form-card" [formGroup]="loginInfoForm">
+    <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field class="example-full-width">
+        <mat-label>First name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Nom d'utilisateur"
+          formControlName="username"
+        />
+        <mat-error>{{ getFormControlErrorText(usernameCtrl) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder="Mot de passe"
+          formControlName="password"
+        />
+        <mat-error>{{ getFormControlErrorText(passwordCtrl) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirmer votre mot de passe</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder="Confirm Mot de passe"
+          formControlName="confirmPassword"
+        />
+        <mat-error>{{
+          getFormControlErrorText(confirmPasswordCtrl)
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <small class="error-text" *ngIf="showPasswordConfirmError$ | async"
+      >Les deux champs ne correspondent pas</small
+    >
+  </mat-card>
+  <mat-card-actions class="btn-container" *ngIf="mainForm.valid">
+    <button mat-flat-button color="primary" (click)="onSubmitForm()">
+      ENREGISTRER
+    </button>
+  </mat-card-actions>
+  <mat-spinner
+    *ngIf="loading"
+    color="primary"
+    mode="indeterminate"
+  ></mat-spinner>
+</mat-card>

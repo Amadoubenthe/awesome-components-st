@@ -1,8 +1,6 @@
-<div class="main-content">
-  <h2>Posts</h2>
-  <app-post-list-item
-    *ngFor="let post of posts$ | async"
-    [post]="post"
-    (postCommented)="onAddComment($event)"
-  ></app-post-list-item>
-</div>
+<h2>Posts</h2>
+<app-post-list-item
+  *ngFor="let post of posts$ | async"
+  [post]="post"
+  (postCommented)="onAddComment($event)"
+></app-post-list-item>

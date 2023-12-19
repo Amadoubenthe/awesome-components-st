@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
   exports: [
+    CommonModule,
     MaterialModule,
     CommentsComponent,
     ReactiveFormsModule,
