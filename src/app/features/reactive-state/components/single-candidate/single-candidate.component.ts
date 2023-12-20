@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatesService } from '../../services/candidates/candidates.service';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { Candidate } from '../../models/candidate.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SingleCandidateComponent {
   loading$!: Observable<boolean>;
   candidate$!: Observable<Candidate>;
+  id!: number;
 
   constructor(
     private candidatesService: CandidatesService,
@@ -29,7 +30,8 @@ export class SingleCandidateComponent {
     this.candidate$ = this.route.params.pipe(
       switchMap((params) =>
         this.candidatesService.getCandidateById(+params['id'])
-      )
+      ),
+      tap((params) => (this.id = +params['id']))
     );
   }
 
@@ -38,7 +40,8 @@ export class SingleCandidateComponent {
   }
 
   onRefuse() {
-    throw new Error('Method not implemented.');
+    this.candidatesService.deleteCandidate(this.id);
+    this.onGoBack();
   }
 
   onGoBack() {
