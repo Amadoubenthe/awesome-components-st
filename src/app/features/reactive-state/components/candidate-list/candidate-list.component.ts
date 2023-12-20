@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, combineLatest, map, startWith } from 'rxjs';
 import { CandidatesService } from '../../services/candidates/candidates.service';
 import { Candidate } from '../../models/candidate.model';
 import { SearchTypeOption } from '../../models/search-typeOption.model';
@@ -37,11 +37,22 @@ export class CandidateListComponent implements OnInit {
       startWith(this.searchCtrl.value),
       map((value: string) => value.toLowerCase())
     );
+
     const searchType$ = this.searchTypeCtrl.valueChanges.pipe(
       startWith(this.searchTypeCtrl.value)
     );
 
-    this.candidates$ = this.candidatesService.candidates$;
+    this.candidates$ = combineLatest([
+      search$,
+      searchType$,
+      this.candidatesService.candidates$,
+    ]).pipe(
+      map(([search, searchType, candidates]) =>
+        candidates.filter((candidate: Candidate | any) =>
+          candidate[searchType].toLowerCase().includes(search as string)
+        )
+      )
+    );
   }
 
   private initForm(): void {
