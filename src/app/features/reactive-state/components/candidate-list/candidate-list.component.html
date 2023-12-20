@@ -1,6 +1,30 @@
 <mat-card>
   <mat-card-title-group>
     <mat-card-title> Candidats </mat-card-title>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Search</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="searchCtrl"
+          placeholder="example"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-error>required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Type de recherche</mat-label>
+        <mat-select [formControl]="searchTypeCtrl">
+          <mat-option
+            *ngFor="let option of searchTypeOptions"
+            [value]="option.value"
+          >
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </mat-card-title-group>
   <mat-spinner *ngIf="loading$ | async"></mat-spinner>
   <mat-nav-list *ngFor="let candidate of candidates$ | async">
